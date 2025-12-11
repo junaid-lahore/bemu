@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 20% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+    --primary: 348 100% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 95% 55%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 45%;
+    --accent: 280 85% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 348 100% 58%;
+    --radius: 0.5rem;
+    --chart-1: 348 100% 58%;
+    --chart-2: 220 95% 55%;
+    --chart-3: 280 85% 60%;
+    --chart-4: 38 92% 50%;
+    --chart-5: 22 76% 51%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 0 0% 98%;
+    --card: 220 20% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 20% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 348 100% 62%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 90% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 8% 60%;
+    --accent: 280 80% 65%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 348 100% 62%;
+    --chart-1: 348 100% 62%;
+    --chart-2: 220 90% 60%;
+    --chart-3: 280 80% 65%;
+    --chart-4: 38 95% 55%;
+    --chart-5: 168 70% 48%;
+  }
+}
+
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.carousel-track {
+  display: flex;
+  animation: scrollWheel 50s linear infinite;
+}
+
+@keyframes scrollWheel {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.text-glow {
+  text-shadow: 0 0 8px theme('colors.beamu-orange'), 0 0 20px theme('colors.beamu-yellow / 50%');
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-40px) translateX(30px);
+    opacity: 0.5;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Embla Carousel Styles */
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  position: relative;
+  flex: 0 0 300px; /* A bit wider for better spacing */
+  min-width: 0;
+  padding: 0 1rem; /* Symmetrical padding */
+  height: auto; /* Allow card to determine height */
+}
+
+.embla__slide .h-full {
+  height: 100%;
+}
+
+.embla__slide .aspect-w-9.aspect-h-16 {
+    height: 450px; /* Fixed height for the video container */
+    flex-shrink: 0;
+}
+
+.embla-fade-container {
+  position: relative;
+}
+
+.embla-fade-container::before,
+.embla-fade-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10%; /* Adjust width of the fade */
+  z-index: 1;
+  pointer-events: none;
+}
+
+.embla-fade-container::before {
+  left: 0;
+  background: linear-gradient(to right, #0C1021, transparent);
+}
+
+.embla-fade-container::after {
+  right: 0;
+  background: linear-gradient(to left, #181C28, transparent);
+}
+
+.embla__buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Let clicks pass through to buttons */
+  z-index: 2; /* Ensure buttons are above the fade effect */
+}
+
+.embla__button {
+  pointer-events: all; /* Make buttons clickable */
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  border-radius: 9999px;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.embla__button:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.embla__button--prev {
+  margin-left: 1rem;
+}
+
+.embla__button--next {
+  margin-right: 1rem;
+}
+
+.embla__button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 166, 77, 0.1);
+  filter: blur(40px);
+  animation: float 20s infinite ease-in-out;
+}
+
+.orb-1 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: 20%;
+  animation-duration: 15s;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 200px;
+  height: 200px;
+  top: 60%;
+  right: 15%;
+  animation-duration: 20s;
+  animation-delay: 5s;
+}
+
+.orb-3 {
+  width: 150px;
+  height: 150px;
+  bottom: 10%;
+  left: 30%;
+  animation-duration: 25s;
+  animation-delay: 10s;
+}
+
+.character-card {
+  transition: all 0.3s ease;
+}
+
+.character-card:hover {
+  transform: translateY(-5px);
+}
+
+.character-card .character-image {
+  border: 2px solid rgba(255, 166, 77, 0.5);
+  box-shadow: 0 0 15px rgba(255, 166, 77, 0.2);
+  transition: all 0.3s ease;
+}
+
+.character-card:hover .character-image {
+  border-color: rgba(255, 166, 77, 1);
+  box-shadow: 0 0 25px rgba(255, 166, 77, 0.5);
+}
+
+.timeline-step {
+  transition: all 0.3s ease;
+}
+
+@keyframes move-streak {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.streak {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255, 166, 77, 0.2));
+  animation: move-streak 10s linear infinite;
+}
+
+.streak-1 {
+  top: 20%;
+  left: 0;
+  width: 50%;
+  animation-duration: 8s;
+  animation-delay: 0s;
+}
+
+.streak-2 {
+  top: 50%;
+  left: 0;
+  width: 70%;
+  animation-duration: 12s;
+  animation-delay: 3s;
+}
+
+.streak-3 {
+  top: 80%;
+  left: 0;
+  width: 40%;
+  animation-duration: 10s;
+  animation-delay: 6s;
+}
+
+.filter-button {
+  border: 1px solid rgba(255, 166, 77, 0.4);
+  color: #FFA64D;
+  background: transparent;
+  border-radius: 50px;
+  padding: 10px 24px;
+  font-weight: 500;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+}
+
+.filter-button.active,
+.filter-button:hover {
+  background: #FFA64D;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 166, 77, 0.5);
+}
+
+.video-card {
+  transition: all 0.3s ease;
+}
+
+.video-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 20px rgba(255, 166, 77, 0.3);
+}
+
+.social-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,166,77,0.3);
+  color: #FFA64D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: all 0.3s ease;
+}
+.social-icon:hover {
+  background: #FFA64D;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255,166,77,0.5);
+  transform: scale(1.1);
+}
+
+.subscribe-button {
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.subscribe-button:hover {
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+  transform: scale(1.05);
+}
+
+input[type="email"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+.adventure-card:hover img {
+  transform: scale(1.05);
+}
+
+.content-wrapper {
+  width: 90%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.slider-card {
+  width: 340px;
+  background: #1A1F2B;
+  border: 1px solid rgba(255, 166, 77, 0.2);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(255, 166, 77, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.slider-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 25px rgba(255, 166, 77, 0.2);
+  border-color: rgba(255, 166, 77, 0.4);
+}
+.slider-card iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+}
