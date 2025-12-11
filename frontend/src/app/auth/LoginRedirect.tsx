@@ -1,5 +1,8 @@
+'use client';
+
 import { useStackApp } from "@stackframe/react";
-import { Navigate } from "react-router-dom";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const popFromLocalStorage = (key: string): string | null => {
   if (typeof window !== 'undefined' && window.localStorage) {
@@ -13,15 +16,14 @@ const popFromLocalStorage = (key: string): string | null => {
 
 
 export const LoginRedirect = () => {
-  const app = useStackApp()
+  const app = useStackApp();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
-  const queryParams = new URLSearchParams(window.location.search);
+  useEffect(() => {
+    const next = searchParams.get('next') || popFromLocalStorage('dtbn-login-next');
+    router.replace(next || '/');
+  }, [router, searchParams]);
 
-  const next = queryParams.get('next') || popFromLocalStorage('dtbn-login-next')
-
-  if (next) {
-    return <Navigate to={next} replace={true} />
-  }
-
-  return <Navigate to="/" replace={true} />
+  return null;
 };

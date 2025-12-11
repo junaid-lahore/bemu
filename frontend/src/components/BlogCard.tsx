@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
-import { BlogPost } from "types";
+'use client';
+
+import Link from "next/link";
+import { BlogPost } from "@/brain/data-contracts";
 
 interface Props {
   post: BlogPost;
@@ -26,7 +28,7 @@ export const BlogCard = ({ post }: Props) => {
 
   return (
     <Link 
-      to={`/blogs?slug=${post.slug}`}
+      href={`/blogs?slug=${post.slug}`}
       className="blog-card bg-[#1A1F2B] border border-[#FFA64D22] rounded-2xl shadow-lg hover:shadow-[#FFA64D33] transition-all cursor-pointer block overflow-hidden group"
     >
       <img 

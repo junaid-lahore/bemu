@@ -1,11 +1,13 @@
+'use client';
+
 import React, { useState } from "react";
 import CenteredContent from "./CenteredContent";
 import { X, ZoomIn, Film } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 const MomentsGallery: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const moments = [
     {
@@ -71,7 +73,7 @@ const MomentsGallery: React.FC = () => {
   ];
 
   const handleImageClick = (moment: typeof moments[0]) => {
-    navigate(`/adventure-detail?arcId=${moment.arcId}&episode=${moment.episodeIndex}&short=${moment.shortIndex}`);
+    router.push(`/adventure-detail?arcId=${moment.arcId}&episode=${moment.episodeIndex}&short=${moment.shortIndex}`);
   };
 
   const openLightbox = (index: number) => {

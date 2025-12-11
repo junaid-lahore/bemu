@@ -1,12 +1,14 @@
+'use client';
+
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
-import { BlogPost } from "types";
-import brain from "brain";
-import { NavigationBarNew } from "components/NavigationBarNew";
-import { Footer } from "components/Footer";
+import { BlogPost } from "@/brain/data-contracts";
+import brain from "@/brain";
+import { NavigationBarNew } from "@/components/NavigationBarNew";
+import { Footer } from "@/components/Footer";
 import { Calendar, Tag, ArrowLeft, Mail } from "lucide-react";
 
 interface Props {
@@ -125,7 +127,7 @@ export const BlogLayout = ({ post }: Props) => {
       {/* Hero Section */}
       <section className="relative w-full pt-24 bg-gradient-to-b from-[#0C1021] to-[#181C28]">
         <div className="content-wrapper py-8">
-          <Link to="/blogs" className="text-[#FFA64D] text-sm mb-6 inline-flex items-center gap-2 hover:gap-3 transition-all">
+          <Link href="/blogs" className="text-[#FFA64D] text-sm mb-6 inline-flex items-center gap-2 hover:gap-3 transition-all">
             <ArrowLeft className="w-4 h-4" /> Back to Blogs
           </Link>
         </div>
@@ -201,7 +203,7 @@ export const BlogLayout = ({ post }: Props) => {
                   {relatedPosts.map((relatedPost) => (
                     <Link
                       key={relatedPost.slug}
-                      to={`/blogs?slug=${relatedPost.slug}`}
+                      href={`/blogs?slug=${relatedPost.slug}`}
                       className="group block bg-[#1A1F2B] border border-[#FFA64D22] rounded-xl overflow-hidden hover:shadow-[0_0_20px_rgba(255,166,77,0.3)] transition-all"
                     >
                       <div className="aspect-video overflow-hidden">
@@ -266,7 +268,7 @@ export const BlogLayout = ({ post }: Props) => {
                     {recentPosts.map((recentPost) => (
                       <Link
                         key={recentPost.slug}
-                        to={`/blogs?slug=${recentPost.slug}`}
+                        href={`/blogs?slug=${recentPost.slug}`}
                         className="group flex gap-3 hover:bg-[#FFA64D11] p-2 rounded-lg transition-colors"
                       >
                         <img
@@ -293,7 +295,7 @@ export const BlogLayout = ({ post }: Props) => {
                   {["AI Storytelling", "Educational Values", "Behind the Light", "Episode Breakdowns"].map((cat) => (
                     <Link
                       key={cat}
-                      to={`/blogs?category=${encodeURIComponent(cat)}`}
+                      href={`/blogs?category=${encodeURIComponent(cat)}`}
                       className="block px-4 py-2 bg-[#0C1021] border border-[#FFA64D22] rounded-lg text-gray-300 text-sm hover:bg-[#FFA64D22] hover:text-[#FFA64D] hover:border-[#FFA64D] transition-all"
                     >
                       → {cat}

@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import CenteredContent from "./CenteredContent";
 import { Lightbulb, Palette, Sparkles, Film, ArrowRight } from "lucide-react";

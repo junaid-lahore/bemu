@@ -1,8 +1,16 @@
 import { APP_BASE_PATH } from '@/constants';
 import { StackClientApp } from '@stackframe/react';
-import { useNavigate } from 'react-router-dom';
 import { config } from './config';
 import { joinPaths } from './utils';
+
+// For Next.js, we'll use window.location for navigation
+const useNavigate = () => {
+  return (path: string) => {
+    if (typeof window !== 'undefined') {
+      window.location.href = path;
+    }
+  };
+};
 
 export const stackClientApp = new StackClientApp({
   projectId: config.projectId,

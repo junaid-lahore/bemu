@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import CenteredContent from "./CenteredContent";
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react";

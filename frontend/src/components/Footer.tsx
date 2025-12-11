@@ -1,5 +1,7 @@
+'use client';
+
 import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { FaYoutube, FaInstagram, FaTiktok, FaTwitter } from "react-icons/fa";
 
 export const Footer: React.FC = () => {
@@ -32,22 +34,22 @@ export const Footer: React.FC = () => {
             <h3 className="text-lg font-semibold text-[#FFA64D] mb-4">Quick Links</h3>
             <ul className="space-y-3">
               <li>
-                <Link to="/" className="text-gray-400 hover:text-[#FFA64D] transition-colors duration-200 text-sm flex items-center gap-2">
+                <Link href="/" className="text-gray-400 hover:text-[#FFA64D] transition-colors duration-200 text-sm flex items-center gap-2">
                   <span className="text-[#FFA64D]">›</span> Home
                 </Link>
               </li>
               <li>
-                <Link to="/adventures" className="text-gray-400 hover:text-[#FFA64D] transition-colors duration-200 text-sm flex items-center gap-2">
+                <Link href="/adventures" className="text-gray-400 hover:text-[#FFA64D] transition-colors duration-200 text-sm flex items-center gap-2">
                   <span className="text-[#FFA64D]">›</span> Adventures
                 </Link>
               </li>
               <li>
-                <Link to="/blogs" className="text-gray-400 hover:text-[#FFA64D] transition-colors duration-200 text-sm flex items-center gap-2">
+                <Link href="/blogs" className="text-gray-400 hover:text-[#FFA64D] transition-colors duration-200 text-sm flex items-center gap-2">
                   <span className="text-[#FFA64D]">›</span> Blogs
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-gray-400 hover:text-[#FFA64D] transition-colors duration-200 text-sm flex items-center gap-2">
+                <Link href="/contact" className="text-gray-400 hover:text-[#FFA64D] transition-colors duration-200 text-sm flex items-center gap-2">
                   <span className="text-[#FFA64D]">›</span> Contact
                 </Link>
               </li>

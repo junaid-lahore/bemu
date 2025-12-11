@@ -1,3 +1,5 @@
+'use client';
+
 import { APP_BASE_PATH } from "@/constants";
 import {
   type CurrentInternalServerUser,
@@ -7,7 +9,8 @@ import {
 } from "@stackframe/react";
 import type * as React from "react";
 import { createContext, useContext } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { useRouter, usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 type UserGuardContextType = {
   user: CurrentUser | CurrentInternalServerUser;
@@ -41,27 +44,28 @@ export const UserGuard = (props: {
 }) => {
   const app = useStackApp();
   const user = useUser();
+  const router = useRouter();
+  const pathname = usePathname();
 
-  const { pathname } = useLocation();
+  useEffect(() => {
+    if (!user && typeof window !== 'undefined') {
+      const queryParams = new URLSearchParams(window.location.search);
+
+      // Don't set the next param if the user is logging out
+      // to avoid ending up in an infinite redirect loop
+      if (pathname !== app.urls.signOut) {
+        writeToLocalStorage("dtbn-login-next", pathname || '/');
+        queryParams.set("next", pathname || '/');
+      }
+
+      const queryString = queryParams.toString();
+      const signInUrl = `${app.urls.signIn.replace(APP_BASE_PATH, "/").replace("//", "/")}?${queryString}`;
+      router.replace(signInUrl);
+    }
+  }, [user, pathname, router, app.urls.signIn, app.urls.signOut]);
 
   if (!user) {
-    const queryParams = new URLSearchParams(window.location.search);
-
-    // Don't set the next param if the user is logging out
-    // to avoid ending up in an infinite redirect loop
-    if (pathname !== app.urls.signOut) {
-      writeToLocalStorage("dtbn-login-next", pathname);
-      queryParams.set("next", pathname);
-    }
-
-    const queryString = queryParams.toString();
-
-    return (
-      <Navigate
-        to={`${app.urls.signIn.replace(APP_BASE_PATH, "/").replace("//", "/")}?${queryString}`}
-        replace={true}
-      />
-    );
+    return null; // Will redirect via useEffect
   }
 
   return (
