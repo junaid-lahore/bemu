@@ -75,7 +75,7 @@ const adventureData: { [key: string]: AdventureArc } = {
                 { title: "Mom… He's Not From Earth 😳🤖 | Beamu's Secret Revealed | Beamu Adventures Ep: 6.2", url: "https://www.youtube.com/embed/WZiUXlvre48" },
                 { title: "The Light of Forgiveness 💛✨ | Beamu's Glow of Truth | Beamu Adventures Ep: 6.3", url: "https://www.youtube.com/embed/50TT92f8sC4" },
                 { title: "They Finally Called Him Family 💛✨ | Beamu's Heartwarming Welcome | Beamu Adventures Ep: 6.4", url: "https://www.youtube.com/embed/TH-yPZnDjcA" },
-                { title: "His Last Words… 🌙💛 "Every Light Shines Brighter" | Beamu Adventures | Adv: 01 | Ep: 6.5", url: "https://www.youtube.com/embed/6YaiXV62zT4" },
+                { title: "His Last Words… 🌙💛 \"Every Light Shines Brighter\" | Beamu Adventures | Adv: 01 | Ep: 6.5", url: "https://www.youtube.com/embed/6YaiXV62zT4" },
             ]
         }
     ],

@@ -1,9 +1,9 @@
 {
   "pages": {
-    "/page": [
+    "/adventure-detail/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
+      "static/chunks/app/adventure-detail/page.js"
     ],
     "/layout": [
       "static/chunks/webpack.js",
@@ -21,20 +21,25 @@
       "static/chunks/main-app.js",
       "static/chunks/app/not-found.js"
     ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
+    ],
     "/adventures/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/adventures/page.js"
     ],
-    "/adventure-detail/page": [
+    "/contact/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/adventure-detail/page.js"
+      "static/chunks/app/contact/page.js"
     ],
-    "/_not-found/page": [
+    "/blogs/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/blogs/page.js"
     ]
   }
 }
