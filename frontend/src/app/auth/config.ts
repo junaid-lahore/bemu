@@ -9,9 +9,22 @@ const configSchema = z.object({
 
 type StackAuthExtensionConfig = z.infer<typeof configSchema>;
 
-// This is set by vite.config.ts
-declare const __STACK_AUTH_CONFIG__: string;
+// Helper function to get Stack Auth config from environment variables
+// Uses NEXT_PUBLIC_ prefix for client-side access in Next.js
+const getStackAuthConfig = (): Record<string, unknown> => {
+  // Read from NEXT_PUBLIC_STACK_AUTH_CONFIG (client-side accessible)
+  if (process.env.NEXT_PUBLIC_STACK_AUTH_CONFIG) {
+    try {
+      return JSON.parse(process.env.NEXT_PUBLIC_STACK_AUTH_CONFIG);
+    } catch (err) {
+      console.error("Error parsing NEXT_PUBLIC_STACK_AUTH_CONFIG", err);
+    }
+  }
+
+  // Return empty object as default
+  return {};
+};
 
 export const config: StackAuthExtensionConfig = configSchema.parse(
-  JSON.parse(__STACK_AUTH_CONFIG__),
+  getStackAuthConfig()
 );

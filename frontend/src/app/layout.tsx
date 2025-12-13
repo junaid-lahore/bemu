@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import { ThemeProvider } from '@/internal-components/ThemeProvider';
 import { DEFAULT_THEME } from '@/constants/default-theme';
-import { StackProvider, StackTheme } from '@stackframe/react';
-import { stackClientApp } from '@/app/auth';
 import { OuterErrorBoundary } from '@/prod-components/OuterErrorBoundary';
 import { AppProvider } from '@/components/AppProvider';
+import { StackProviders } from '@/components/StackProviders';
 import '@/index.css';
 
 export const metadata: Metadata = {
@@ -21,15 +20,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <OuterErrorBoundary>
-          <StackProvider app={stackClientApp}>
-            <StackTheme>
-              <ThemeProvider defaultTheme={DEFAULT_THEME}>
-                <AppProvider>
-                  {children}
-                </AppProvider>
-              </ThemeProvider>
-            </StackTheme>
-          </StackProvider>
+          <StackProviders>
+            <ThemeProvider defaultTheme={DEFAULT_THEME}>
+              <AppProvider>
+                {children}
+              </AppProvider>
+            </ThemeProvider>
+          </StackProviders>
         </OuterErrorBoundary>
       </body>
     </html>
