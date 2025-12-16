@@ -23,3 +23,5 @@ NEXT_PUBLIC_STACK_AUTH_CONFIG='{"projectId":"xxx","publishableClientKey":"yyy","
 
 **Note:** The `NEXT_PUBLIC_` prefix is required for client-side access in Next.js.
 
+
+

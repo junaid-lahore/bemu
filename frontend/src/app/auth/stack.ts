@@ -15,7 +15,7 @@ const useNavigate = () => {
 export const stackClientApp = new StackClientApp({
   projectId: config.projectId,
   publishableClientKey: config.publishableClientKey,
-  tokenStore: 'cookie',
+  tokenStore: typeof window !== 'undefined' ? 'cookie' : 'memory',
   redirectMethod: {
     useNavigate
   },

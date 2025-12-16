@@ -1,9 +1,14 @@
 'use client';
 
+import { Suspense } from 'react';
 import { LoginRedirect } from '../LoginRedirect';
 
 export default function AuthRedirectPage() {
-  return <LoginRedirect />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginRedirect />
+    </Suspense>
+  );
 }
 
 

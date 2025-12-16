@@ -75,14 +75,15 @@ const CommunitySubmissionForm: React.FC<CommunitySubmissionFormProps> = ({ onClo
           onClose();
         }
       } else {
-        const formData = new FormData();
-        formData.append("name", name.trim());
-        if (email.trim()) formData.append("email", email.trim());
-        formData.append("title", imageTitle.trim());
-        if (age.trim()) formData.append("age", age.trim());
-        formData.append("image", imageFile);
+        if (!imageFile) return;
 
-        const response = await brain.submit_image(formData);
+        const response = await brain.submit_image({
+          name: name.trim(),
+          email: email.trim() || undefined,
+          title: imageTitle.trim(),
+          age: age.trim() || undefined,
+          image: imageFile,
+        });
         
         if (response.ok) {
           toast.success("Thank you for sharing your creation! It will appear soon.");

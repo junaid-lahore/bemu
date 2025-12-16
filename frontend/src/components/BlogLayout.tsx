@@ -25,7 +25,7 @@ export const BlogLayout = ({ post }: Props) => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const httpResponse = await brain.list_blog_posts();
+        const httpResponse = await brain.list_blog_posts({});
         const response = await httpResponse.json();
         const allPosts = response.posts || [];
 

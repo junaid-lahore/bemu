@@ -1,11 +1,7 @@
-'use client';
-
-import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import ReactPlayer from "react-player/youtube";
 import Link from "next/link";
 import { NavigationBarNew } from "@/components/NavigationBarNew";
 import { Footer } from "@/components/Footer";
+import { VideoPlayer } from "./VideoPlayer";
 
 // --- Data Structure for Adventure Arcs and Episodes ---
 const adventureData: { [key: string]: AdventureArc } = {
@@ -127,53 +123,57 @@ interface AdventureArc {
   episodes: Episode[];
 }
 
-export default function AdventureDetail() {
-  const searchParams = useSearchParams();
-  const arcId = searchParams.get("arcId");
-  const episodeParam = searchParams.get("episode");
-  const shortParam = searchParams.get("short");
+export default function AdventureDetail({
+  searchParams,
+}: {
+  searchParams: { arcId?: string; episode?: string; short?: string };
+}) {
+  const arcId = searchParams.arcId || "";
+  const episodeParam = searchParams.episode ?? null;
+  const shortParam = searchParams.short ?? null;
 
-  const [arc, setArc] = useState<AdventureArc | null>(null);
-  const [activeShort, setActiveShort] = useState<Short | null>(null);
+  const arc: AdventureArc | null = arcId ? adventureData[arcId] : null;
 
-  useEffect(() => {
-    const currentArc = arcId ? adventureData[arcId] : null;
-    if (currentArc) {
-      setArc(currentArc);
-      
-      if (episodeParam !== null && shortParam !== null) {
-        const episodeIndex = parseInt(episodeParam);
-        const shortIndex = parseInt(shortParam);
-        
-        if (currentArc.episodes[episodeIndex] && currentArc.episodes[episodeIndex].shorts[shortIndex]) {
-          setActiveShort(currentArc.episodes[episodeIndex].shorts[shortIndex]);
-          return;
-        }
+  let activeShort: Short | null = null;
+  let activeEpisodeIndex = 0;
+  let activeShortIndex = 0;
+
+  if (arc) {
+    if (episodeParam !== null && shortParam !== null) {
+      activeEpisodeIndex = parseInt(episodeParam);
+      activeShortIndex = parseInt(shortParam);
+      if (
+        arc.episodes[activeEpisodeIndex] &&
+        arc.episodes[activeEpisodeIndex].shorts[activeShortIndex]
+      ) {
+        activeShort = arc.episodes[activeEpisodeIndex].shorts[activeShortIndex];
       }
+    }
+    
+    // Fallback to first video if not found or params missing
+    if (!activeShort && arc.episodes.length > 0 && arc.episodes[0].shorts.length > 0) {
+      activeShort = arc.episodes[0].shorts[0];
+      activeEpisodeIndex = 0;
+      activeShortIndex = 0;
+    }
+  }
+
+  // Calculate next URL for auto-play
+  let nextUrl: string | null = null;
+  if (arc && activeShort) {
+      const allShorts = arc.episodes.flatMap((ep, epIdx) => 
+          ep.shorts.map((s, sIdx) => ({ epIdx, sIdx }))
+      );
       
-      if (currentArc.episodes.length > 0 && currentArc.episodes[0].shorts.length > 0) {
-        setActiveShort(currentArc.episodes[0].shorts[0]);
+      const currentIndex = allShorts.findIndex(
+          item => item.epIdx === activeEpisodeIndex && item.sIdx === activeShortIndex
+      );
+
+      if (currentIndex !== -1 && currentIndex < allShorts.length - 1) {
+          const next = allShorts[currentIndex + 1];
+          nextUrl = `/adventure-detail?arcId=${arc.id}&episode=${next.epIdx}&short=${next.sIdx}`;
       }
-    } else {
-      setArc(null);
-      setActiveShort(null);
-    }
-  }, [arcId, episodeParam, shortParam]);
-  
-  const handleShortClick = (short: Short) => {
-    setActiveShort(short);
-  };
-  
-  const handleVideoEnded = () => {
-    if (!arc || !activeShort) return;
-
-    const allShorts = arc.episodes.flatMap(ep => ep.shorts);
-    const currentIndex = allShorts.findIndex(s => s.url === activeShort.url);
-
-    if (currentIndex !== -1 && currentIndex < allShorts.length - 1) {
-      setActiveShort(allShorts[currentIndex + 1]);
-    }
-  };
+  }
 
   if (!arc) {
     return (
@@ -207,41 +207,37 @@ export default function AdventureDetail() {
               <div className="lg:col-span-2 sticky top-24 self-start">
                 <div className="aspect-video bg-black rounded-lg overflow-hidden shadow-2xl shadow-black/30">
                   {activeShort && (
-                    <ReactPlayer
-                      key={activeShort.url}
-                      url={activeShort.url}
-                      playing={true}
-                      controls={true}
-                      width="100%"
-                      height="100%"
-                      onEnded={handleVideoEnded}
+                    <VideoPlayer 
+                      url={activeShort.url} 
+                      nextUrl={nextUrl} 
+                      title={activeShort.title} 
                     />
                   )}
                 </div>
-                 <h3 className="text-white text-2xl font-semibold mt-4 mb-2">
-                    {activeShort?.title}
+                <h3 className="text-white text-2xl font-semibold mt-4 mb-2">
+                  {activeShort?.title}
                 </h3>
               </div>
 
               <div className="bg-[#1A1F2B] p-4 rounded-xl border border-[#FFA64D22] max-h-[calc(100vh-12rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-[#FFA64D] scrollbar-track-[#252a36]">
                 <h3 className="text-white text-xl font-semibold mb-4 sticky top-0 bg-[#1A1F2B] pb-2 z-10">Videos in this Arc</h3>
                 <ul className="space-y-4">
-                  {arc.episodes.map((episode) => (
+                  {arc.episodes.map((episode, episodeIndex) => (
                     <li key={episode.title}>
                         <h4 className="text-lg font-semibold text-[#FFA64D] mb-2">{episode.title}</h4>
                         <ul className="space-y-2">
-                            {episode.shorts.map((short) => (
+                            {episode.shorts.map((short, shortIndex) => (
                                 <li key={short.title}>
-                                    <button
-                                        onClick={() => handleShortClick(short)}
-                                        className={`w-full text-left p-3 rounded-lg transition-colors duration-200 text-sm ${
+                                    <Link
+                                      href={`/adventure-detail?arcId=${arc.id}&episode=${episodeIndex}&short=${shortIndex}`}
+                                      className={`block w-full text-left p-3 rounded-lg transition-colors duration-200 text-sm ${
                                         activeShort?.url === short.url
-                                            ? "bg-[#FFA64D] text-black font-semibold"
-                                            : "bg-[#252a36] hover:bg-[#313846]"
-                                        }`}
+                                          ? "bg-[#FFA64D] text-black font-semibold"
+                                          : "bg-[#252a36] hover:bg-[#313846]"
+                                      }`}
                                     >
-                                        {short.title}
-                                    </button>
+                                      {short.title}
+                                    </Link>
                                 </li>
                             ))}
                         </ul>
@@ -255,5 +251,3 @@ export default function AdventureDetail() {
     </div>
   );
 }
-
-

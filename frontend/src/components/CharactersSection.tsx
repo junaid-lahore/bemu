@@ -54,8 +54,10 @@ const characters = [
   },
 ];
 
+type Character = typeof characters[0];
+
 const CharactersSection: React.FC = () => {
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null);
 
   return (
     <section id="meet-characters" className="py-24 bg-gradient-to-b from-[#0C1021] to-[#181C28] text-center">
