@@ -26687,13 +26687,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/mixpanel-browser@npm:^2":
-  version: 2.49.0
-  resolution: "@types/mixpanel-browser@npm:2.49.0"
-  checksum: e440511f2658fea16cc74ade36c1f6ec25b1bb83b5d3427e890f92c71ab6ff95bd8b829ba39c8fea6b576cdf16a3287d06fe8a56bfa0b4c29ffffd66dcdcb3fa
-  languageName: node
-  linkType: hard
-
 "@types/ms@npm:*":
   version: 0.7.34
   resolution: "@types/ms@npm:0.7.34"
@@ -30435,7 +30428,6 @@ __metadata:
     "@types/lodash": "npm:^4"
     "@types/mapbox-gl": "npm:2.7.20"
     "@types/mapbox__mapbox-gl-draw": "npm:^1"
-    "@types/mixpanel-browser": "npm:^2"
     "@types/node": "npm:20.6.2"
     "@types/novnc__novnc": "npm:^1"
     "@types/p5": "npm:1.7.6"
