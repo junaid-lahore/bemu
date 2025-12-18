@@ -26372,15 +26372,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/firebase@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "@types/firebase@npm:3.2.1"
-  dependencies:
-    firebase: "npm:*"
-  checksum: a25537dd8596f1cb47370fe3a607b4a196dd868ca833f980da93853b3be28efc75f31bcd0915a2f7f5878946f61672c178e95acfc6e0c9039e234da807c9ddb5
-  languageName: node
-  linkType: hard
-
 "@types/follow-redirects@npm:^1.14.4":
   version: 1.14.4
   resolution: "@types/follow-redirects@npm:1.14.4"
@@ -30439,7 +30430,6 @@ __metadata:
     "@twilio/voice-sdk": "npm:^2.12.4"
     "@types/amplitude-js": "npm:^8"
     "@types/file-saver": "npm:^2"
-    "@types/firebase": "npm:^3.2.1"
     "@types/js-beautify": "npm:^1"
     "@types/leaflet": "npm:1.9.14"
     "@types/lodash": "npm:^4"
@@ -37483,7 +37473,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"firebase@npm:*, firebase@npm:10.8.0":
+"firebase@npm:10.8.0":
   version: 10.8.0
   resolution: "firebase@npm:10.8.0"
   dependencies:
