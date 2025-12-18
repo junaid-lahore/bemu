@@ -1,0 +1,42 @@
+SHORTS_DATA = {
+    1: [
+        {"title": "Ep 1.1", "url": "https://www.youtube.com/shorts/WWt4yhsbmSY"},
+        {"title": "Ep 1.2", "url": "https://www.youtube.com/shorts/0N96Ltu9wr0"},
+        {"title": "Ep 1.3", "url": "https://www.youtube.com/shorts/vEa1cYmQCJk"},
+        {"title": "Ep 1.4", "url": "https://www.youtube.com/shorts/L8Zq4ej7Y-Q"},
+    ],
+    2: [
+        {"title": "Ep 2.1", "url": "https://www.youtube.com/shorts/3rghg1oCTuo"},
+        {"title": "Ep 2.2", "url": "https://www.youtube.com/shorts/0qJLjTtFNjU"},
+        {"title": "Ep 2.3", "url": "https://www.youtube.com/shorts/l0bzYdvDvlA"},
+        {"title": "Ep 2.4", "url": "https://www.youtube.com/shorts/kXiNlEJf4gs"},
+        {"title": "Ep 2.5", "url": "https://www.youtube.com/shorts/sXD_04Oox3Y"},
+        {"title": "Ep 2.6", "url": "https://www.youtube.com/shorts/2CKHFHXL5x0"},
+        {"title": "Ep 2.7", "url": "https://www.youtube.com/shorts/2CKHFHXL5x0"},
+    ],
+    3: [
+        {"title": "Ep 3.1", "url": "https://www.youtube.com/shorts/tsqKYU9hRfQ"},
+        {"title": "Ep 3.2", "url": "https://www.youtube.com/shorts/Z-pSTnfdtX4"},
+        {"title": "Ep 3.3", "url": "https://www.youtube.com/shorts/jP4uqPZXmc4"},
+        {"title": "Ep 3.4", "url": "https://www.youtube.com/shorts/ZoFBx2meMZM"},
+        {"title": "Ep 3.5", "url": "https://www.youtube.com/shorts/n7rc1iinUs4"},
+        {"title": "Ep 3.6", "url": "https://www.youtube.com/shorts/RqQHBL2NxRQ"},
+    ],
+    4: [
+        {"title": "Ep 4.1", "url": "https://www.youtube.com/shorts/r0nCXgifiKI"},
+        {"title": "Ep 4.2", "url": "https://www.youtube.com/shorts/e0QgTcPitQI"},
+        {"title": "Ep 4.3", "url": "https://www.youtube.com/shorts/kdK8qIuXsRw"},
+        {"title": "Ep 4.4", "url": "https://www.youtube.com/shorts/EDv8Q9QzZK4"},
+        {"title": "Ep 4.5", "url": "https://www.youtube.com/shorts/CEC_DvkMvI8"},
+        {"title": "Ep 4.6", "url": "https://www.youtube.com/shorts/YJozcdY-wrI"},
+    ],
+    5: [
+        {"title": "Ep 5.1", "url": "https://www.youtube.com/shorts/9_6kudhDllc"},
+        {"title": "Ep 5.2", "url": "https://www.youtube.com/shorts/455na15RQ9k"},
+        {"title": "Ep 5.3", "url": "https://www.youtube.com/shorts/BYPrqBHAcUc"},
+        {"title": "Ep 5.4", "url": "https://www.youtube.com/shorts/hZSWAsUC_As"},
+        {"title": "Ep 5.5", "url": "https://www.youtube.com/shorts/IUmmB47uUcY"},
+        {"title": "Ep 5.6", "url": "https://www.youtube.com/shorts/HNny5xg-dak"},
+        {"title": "Ep 5.7", "url": "https://www.youtube.com/shorts/hFNEoj-tdWI"},
+    ],
+}
